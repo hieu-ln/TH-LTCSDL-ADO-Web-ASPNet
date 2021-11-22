@@ -1,0 +1,79 @@
+﻿@page
+@using System.Text.Json
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@section scripts{
+    <script type="text/javascript">
+            var data = @Html.Raw(JsonSerializer.Serialize(Model.lst));
+        /**/
+    </script>
+}
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Category ID</th>
+            <th>Category Name</th>
+            <th>Category Description</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var c in Model.lst)
+        {
+            <tr>
+                <td>@c.CategoryID.</td>
+                <td>@c.CategoryName</td>
+                <td>@c.Description</td>
+                <td>
+                    <button class="btn-info" onclick="selectCategory(@c.CategoryID);"> Update</button>
+                    <button class="btn-danger"> Delete</button>
+                </td>
+            </tr>
+        }
+    </table>
+    <div class="row">
+        <div class="col-md-3">
+            <button class="btn-primary"> Add New</button>
+        </div>
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="txtCategoryID">Category ID</label>
+                        <input type="text" class="form-control" id="txtCategoryID" placeholder="ID">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtCategoryName">Category Name</label>
+                        <input type="text" class="form-control" id="txtCategoryName" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtCategoryDesc">Category Description</label>
+                        <input type="text" class="form-control" id="txtCategoryDesc" placeholder="Description">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
